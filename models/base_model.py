@@ -31,6 +31,7 @@ class BaseModel:
         else:
             for k in kwargs:
                 if k in ['created_at', 'updated_at']:
+                    date_format = '%Y-%m-%dT%H:%M:%S'
                     setattr(self, k, datetime.fromisoformat(kwargs[k]))
                 elif k != '__class__':
                     setattr(self, k, kwargs[k])
