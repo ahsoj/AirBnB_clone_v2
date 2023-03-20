@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ Console Module """
-import cmd
-import sys
+import cmd, re, sys, os
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -115,7 +114,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-	ignored_attrs = ('id', 'created_at', 'updated_at', '__class__')
+        ignored_attrs = ('id', 'created_at', 'updated_at', '__class__')
         class_name = ''
         name_pattern = r'(?P<name>(?:[a-zA-Z]|_)(?:[a-zA-Z]|\d|_)*)'
         class_match = re.match(name_pattern, args)
