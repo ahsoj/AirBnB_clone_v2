@@ -11,13 +11,13 @@ class FileStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         if cls is None:
-	    return FileStorage.__objects
-	cls_name = cls.__name__
-	_dict = {}
-	for key , _ in FileStorage.items():
-	    if key.split('.')[0] == cls_name:
-		_dict[key] = FileStorage.__objects[key]
-	return _dict
+	        return FileStorage.__objects
+	    cls_name = cls.__name__
+	    _dict = {}
+	    for key , _ in FileStorage.items():
+	        if key.split('.')[0] == cls_name:
+		    _dict[key] = FileStorage.__objects[key]
+	    return _dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
