@@ -14,6 +14,22 @@ Float,
 ForeignKey
 )
 
+if storage_type == 'db':
+    place_amenity = Table(
+	'place_amenity', 
+	Base.metadata,
+        Column('place_id', 
+		String(60),
+                ForeignKey('places.id'),
+                primary_key=True,
+                nullable=False),
+	Column('amenity_id', 
+		String(60),
+                ForeignKey('amenities.id'),
+                primary_key=True,
+                nullable=False)
+	)
+
 
 class Place(BaseModel, Base):
     """ A place to stay """
@@ -48,36 +64,39 @@ class Place(BaseModel, Base):
     
     @property
     def reviews(self):
-        """ returns list of review instances with place_id
-            equals to the cyrrent Place.id
-            FileStorage relationship between Place and Review
+        """ returns list of review instances with place_id \
+            equals to the cyrrent Place.id  \
+            FileStorage relationship between Place and Review \
         """
         from models import storage
         all_revs = storage.all(Review)
-        lst = []
+        _list = []
         for rev in all_revs.values():
             if rev.place_id == self.id:
-                lst.append(rev)
-	return lst
+                _list.append(rev)
+        return _list
+
     @property
     def amenities(self):
-    	""" returns the list of Amenity instances
-            based on the attribute amenity_ids that
-            contains all Amenity.id linked to the Place
+        """
+            returns then list of Amenity instances \
+            based on the attribute amenity_ids that \
+            contins all Amenity.is linked to the Place \
         """
         from models import storage
-        all_amens = storage.all(Amenity)
-        lst = []
+        all_amens =  storage.all(Amenity)
+        _list = []
         for amen in all_amens.values():
             if amen.id in self.amenity_ids:
-                lst.append(amen)
-	return lst
-    @amenities.setter
+                _list.append(amen)
+        return _list
+
+    @property
     def amenities(self, obj):
-	"""method for adding an Amenity.id to the
-               attribute amenity_ids. accepts only Amenity
-               objects
-	"""
+        """
+          method for addin an Amenity.id to the \
+          attribute amenity_ids. accepts only Amenity \
+          objects """
         if obj is not None:
             if isinstance(obj, Amenity):
                 if obj.id not in self.amenity_ids:
