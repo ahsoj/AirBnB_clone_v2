@@ -5,9 +5,17 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 
+if [ ! command -v nginx &> /dev/null];
+then
+    #sudo apt-get -y install ufw
+    sudo apt-get -y install nginx
+fi
 sudo ufw allow "Nginx HTTP"
 
-sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
+if [ ! -d "/data/web_static"];
+then
+    sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
+fi
 data="
 <html>
     <body>
@@ -16,7 +24,7 @@ data="
 </html>
 "
 echo "$data" > /data/web_static/releases/test/index.html
-sudo chown -hR ubuntu:ubuntu /data
+sudo chown -hR ubuntu:ubuntu /data/
 
 if [ -d "/data/web_static/current" ];
 then
