@@ -2,11 +2,9 @@
 # create recursive child folders & deploy static file
 
 sudo apt-get -y update
-if [ ! command -v nginx &> /dev/null];
-then
-    #sudo apt-get -y install ufw
-    sudo apt-get -y install nginx
-fi
+sudo apt-get -y install nginx
+sudo apt-get -y install ufw
+
 sudo ufw allow "Nginx HTTP"
 
 if [ ! -d "/data/web_static"];
