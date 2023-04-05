@@ -38,7 +38,7 @@ server {
 		alias /data/web_static/current/;
 	}
 }"
-
-echo "$server_config" > /etc/nginx/sites-available/default
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+#echo "$server_config" > /etc/nginx/sites-available/default
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
