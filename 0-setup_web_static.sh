@@ -6,17 +6,19 @@ sudo apt-get -y install nginx
 sudo apt-get -y install ufw
 
 sudo ufw allow "Nginx HTTP"
+
 sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/
 
 echo "<h1>Wlcome to HBNB clone</h1>" > /data/web_static/releases/test/index.html
-sudo chown -hR ubuntu:ubuntu /data
 
 if [ -d "/data/web_static/current" ];
 then
-    sudo rm -rf /data/web_static/current
-fi
-sudo ln -s /data/web_static/releases/test/ /data/web_static/current
+    sudo rm -rf /data/web_static/current;
+fi;
+sudo ln -fs /data/web_static/releases/test/ /data/web_static/current
+sudo chown -hR ubuntu:ubuntu /data
+
 server_config=\
 "server {
 	listen 80 default_server;
@@ -34,5 +36,5 @@ server_config=\
 }"
 
 echo "$server_config" > /etc/nginx/sites-available/default
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo ln -fs /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
