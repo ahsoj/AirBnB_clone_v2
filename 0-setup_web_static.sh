@@ -16,7 +16,7 @@ data="
 </html>
 "
 echo "$data" > /data/web_static/releases/test/index.html
-sudo chmod -hR ubuntu:ubuntu /data
+sudo chown -hR ubuntu:ubuntu /data
 
 if [ -d "/data/web_static/current" ];
 then
