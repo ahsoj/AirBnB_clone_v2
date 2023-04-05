@@ -1,4 +1,4 @@
-#!usr/bin/env bash
+#!/usr/bin/env bash
 # create recursive child folders if needed
 # linked forlders and configure location
 # deploy
