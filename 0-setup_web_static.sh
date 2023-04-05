@@ -6,11 +6,8 @@ sudo apt-get -y install nginx
 sudo apt-get -y install ufw
 
 sudo ufw allow "Nginx HTTP"
+sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
 
-if [ ! -d "/data/web_static"];
-then
-    sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
-fi
 data="
 <html>
     <body>
@@ -25,7 +22,7 @@ if [ -d "/data/web_static/current" ];
 then
     sudo rm -rf /data/web_static/current
 fi
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 server_config="
 server {
 	listen 80 default_server;
@@ -43,5 +40,5 @@ server {
 }"
 
 echo "$server_config" > /etc/nginx/sites-available/default
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
