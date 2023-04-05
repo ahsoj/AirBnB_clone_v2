@@ -40,6 +40,4 @@ server {
 }"
 
 echo "$server_config" > /etc/nginx/sites-available/default
-sudo rm /etc/nginx/sites-enabled/default
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
