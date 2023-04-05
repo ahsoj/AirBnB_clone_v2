@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-# create recursive child folders if needed
-# linked forlders and configure location
-# deploy
-sudo apt-get -y update
-sudo apt-get -y install nginx
+# create recursive child folders & deploy static file
 
+sudo apt-get -y update
 if [ ! command -v nginx &> /dev/null];
 then
     #sudo apt-get -y install ufw
