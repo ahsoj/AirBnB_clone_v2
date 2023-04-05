@@ -7,7 +7,7 @@ sudo apt-get -y install nginx
 
 sudo ufw allow "Nginx HTTP"
 
-sudo mkdir -p /data/web_static/shared/ /data/web_static/releases/test/
+sudo mkdir -p /data/web_static/shared /data/web_static/releases/test
 data="
 <html>
     <body>
@@ -40,4 +40,5 @@ server {
 }"
 
 echo "$server_config" > /etc/nginx/sites-available/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
