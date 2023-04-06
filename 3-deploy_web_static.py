@@ -14,6 +14,11 @@ do_pack = __import__('1-pack_web_static').do_pack
 
 
 def deploy():
-    """"""
+    """
+        Call the do_pack() function and store the path of the created archive
+        Return False if no archive has been created
+        Call the do_deploy(archive_path) function, using the new path of the new archive
+        Return the return value of do_deploy
+    """
     archive_path = do_pack()
     return do_deploy(archive_path) if archive_path else False
