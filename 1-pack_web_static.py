@@ -17,7 +17,7 @@ def do_pack():
     """
     tss = datetime.now().strftime("%Y%m%d%H%M%S")
     local("mkdir -p versions")
-    path = "versions/web_static{}.tgz".format(tss)
+    path = "versions/web_static_{}.tgz".format(tss)
     res = local(
         "tar -czvf {} web_static".format(
             path))
