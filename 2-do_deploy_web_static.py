@@ -3,9 +3,12 @@
    Fabric script (based on the file 1-pack_web_static.py) \
 	 that distributes an archive to your web servers
 """
-from fabric.api import put, env, run
+from fabric.api import put, env, run, runs_once, sudo
 import os
+from datetime import datetime
+
 env.hosts = ['52.91.136.103', '18.235.248.251']
+env.sudo_prefix = "sudo -S -p '%(sudo_prompt)s' "
 
 
 def do_deploy(archive_path):
@@ -14,19 +17,20 @@ def do_deploy(archive_path):
 	uncompress to /data/web_static/releases
 	rtype: archive_path ? True : False
     """
-    if not archive_path:
+    if not os.path.exists(archive_path):
         return False
     dirs = (archive_path).rsplit(".")[0].rsplit("/")[1]
-    ld = "/data/web_static/releases"
+    ld = "/data/web_static/releases/{}".format(dirs)
+    base_n = os.path.basename(archive_path)
     try:
-        put(archive_path, '/tmp/{}'.format(dirs))
-        run("mkdir -p /data/web_static/releases/{}/".format(dirs))
-        run("tar -xzf /tmp/{} -C {}/{}/".format(os.path.basename(archive_path), ld, dirs))
-        run("rm -rf /tmp/{}".format(archive_path))
-        run("mv {}/{}/web_static/* {}/{}".format(ld, dirs, ld, dirs))
-        run("rm -rf {}/{}/web_static".format(ld, dirs))
+        put(archive_path, '/tmp/{}'.format(base_n))
+        run("mkdir -p {}/".format(ld))
+        run("tar -xzf /tmp/{} -C {}/".format(base_n, ld))
+        run("rm -rf /tmp/{}".format(base_n))
+        run("mv {}/web_static/* {}/".format(ld, ld))
+        run("rm -rf {}/web_static".format(ld))
         run("rm -rf /data/web_static/current")
-        run("ln -fs {}/{}/ /data/web_static/current".format(ld, dirs))
+        run("ln -fs {}/ /data/web_static/current".format(ld))
         print('New version deployed!')
     except Exception:
         return False
