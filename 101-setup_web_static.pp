@@ -3,13 +3,17 @@ exec { 'sudo apt -y update' : }
 -> package { 'nginx':
   ensure => installed,
 }
-$directories = split('/data/web_static_releases/test', '/')
-each($directories) |$directory| {
-  if ! defined(File[$directory]) {
-    file { $directory:
-      ensure => directory
-    }
-  }
+-> file { '/data':
+  ensure  => 'directory'
+}
+-> file { '/data/web_static':
+  ensure => 'directory'
+}
+-> file { '/data/web_static/releases':
+  ensure => 'directory'
+}
+-> file { '/data/web_static/releases/test':
+  ensure => 'directory'
 }
 -> file { '/data/web_static/shared':
   ensure => 'directory'
@@ -25,14 +29,11 @@ each($directories) |$directory| {
 -> exec { 'chown -R ubuntu:ubuntu /data/':
   path => '/usr/bin/:/usr/local/bin/:/bin/'
 }
-
-$directories = split('/var/www/html', '/')
-each($directories) |$directory| {
-  if ! defined(File[$directory]) {
-    file { $directory:
-      ensure => directory
-    }
-  }
+-> file { '/var/www':
+  ensure => 'directory'
+}
+-> file { '/var/www/html':
+  ensure => 'directory'
 }
 -> file { '/var/www/html/index.html':
   ensure  => 'present',
