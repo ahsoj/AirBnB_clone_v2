@@ -20,7 +20,7 @@ exec { 'sudo apt -y update' : }
 }
 -> file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => "<h1>Welcome to Holberton</h1>"
+  content => '<h1>Welcome to Holberton</h1>'
 }
 -> file { '/data/web_static/current':
   ensure => 'link',
@@ -37,10 +37,12 @@ exec { 'sudo apt -y update' : }
 }
 -> file { '/var/www/html/index.html':
   ensure  => 'present',
-  content => "<h1>Welcome to Holberton</h1>"
+  content => '<h1>Welcome to Holberton</h1>'
 }
 exec { 'nginx_conf':
-  environment => ['data=\ \tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}\n'],
+  environment => [
+'data=\ \tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}\n'
+],
   command     => 'sed -i "39i $data" /etc/nginx/sites-enabled/default',
   path        => '/usr/bin:/usr/sbin:/bin:/usr/local/bin'
 }
