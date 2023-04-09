@@ -12,23 +12,25 @@ env.sudo_prefix = "sudo -S '%(sudo_prompt)s' " % env
 
 
 def do_deploy(archive_path):
-
+    """
+        upload to /tmp/
+        uncompress to /data/web_static/releases
+        rtype: archive_path ? True : False
+    """
     if not os.path.exists(archive_path):
         return False
     dirs = (archive_path).rsplit(".")[0].rsplit("/")[1]
     ld = "/data/web_static/releases/{}".format(dirs)
     base_n = os.path.basename(archive_path)
-    try:
-        put(archive_path, '/tmp/{}'.format(base_n))
-        run("mkdir -p {}/".format(ld))
-        run("tar -xzf /tmp/{} -C {}/".format(base_n, ld))
-        run("rm -rf /tmp/{}".format(base_n))
-        run("mv {}/web_static/* {}/".format(ld, ld))
-        run("rm -rf {}/web_static".format(ld))
-        run("rm -rf /data/web_static/current")
-        run("ln -fs {}/ /data/web_static/current".format(ld))
-        print('New version deployed!')
-        return True
-    except Exception:
-        return False
+
+    put(archive_path, '/tmp/{}'.format(base_n))
+    run("mkdir -p {}/".format(ld))
+    run("tar -xzf /tmp/{} -C {}/".format(base_n, ld))
+    run("rm -rf /tmp/{}".format(base_n))
+    run("mv {}/web_static/* {}/".format(ld, ld))
+    run("rm -rf {}/web_static".format(ld))
+    run("rm -rf /data/web_static/current")
+    run("ln -fs {}/ /data/web_static/current".format(ld))
+    print('New version deployed!')
+    return True
 
