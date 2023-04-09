@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+   Fabric script (based on the file 1-pack_web_static.py) \
+         that distributes an archive to your web servers
+"""
 
 from fabric.api import put, env, run, runs_once, sudo
 import os
@@ -6,6 +10,18 @@ from datetime import datetime
 
 env.hosts = ['18.235.248.251', '52.91.136.103']
 env.sudo_prefix = "sudo -S '%(sudo_prompt)s' " % env
+
+
+def do_pack():
+    """pack web_static folder to deploy"""
+    tss = datetime.now().strftime("%Y%m%d%H%M%S")
+    path = ("versions/web_static_{}.tgz".format(tss))
+    result = local("tar -cvzf {} web_static".format(path))
+    if result.failed:
+        return None
+    tgz_size = os.stat(path).st_size
+    print("web_static packed: {} -> {} Bytes".format(path, tgz_size))
+    return path
 
 
 def do_deploy(archive_path):
