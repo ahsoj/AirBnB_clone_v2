@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 
 env.hosts = ['18.235.248.251', '52.91.136.103']
-env.sudo_prefix = "sudo -S '%(sudo_prompt)s' " % env
+# env.sudo_prefix = "sudo -S '%(sudo_prompt)s' " % env
 
 
 def do_deploy(archive_path):
@@ -17,7 +17,7 @@ def do_deploy(archive_path):
         uncompress to /data/web_static/releases
         rtype: archive_path ? True : False
     """
-    if not os.path.exists(archive_path):
+    if not archive_path:
         return False
     dirs = (archive_path).rsplit(".")[0].rsplit("/")[1]
     ld = "/data/web_static/releases/{}".format(dirs)
