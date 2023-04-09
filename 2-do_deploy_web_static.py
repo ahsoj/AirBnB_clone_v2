@@ -12,11 +12,7 @@ env.sudo_prefix = "sudo -S '%(sudo_prompt)s' " % env
 
 
 def do_deploy(archive_path):
-    """
-	upload to /tmp/
-	uncompress to /data/web_static/releases
-	rtype: archive_path ? True : False
-    """
+
     if not os.path.exists(archive_path):
         return False
     dirs = (archive_path).rsplit(".")[0].rsplit("/")[1]
