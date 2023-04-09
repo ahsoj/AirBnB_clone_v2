@@ -5,13 +5,10 @@
 """
 from fabric.api import put, env, run, runs_once, sudo
 import os
-#import logging
 from datetime import datetime
 
 env.hosts = ['18.235.248.251', '52.91.136.103']
 env.sudo_prefix = "sudo -S '%(sudo_prompt)s' " % env
-
-#logging.basicConfig(level=logging.INFO)
 
 
 def do_deploy(archive_path):
@@ -37,3 +34,4 @@ def do_deploy(archive_path):
         print('New version deployed!')
     except Exception:
         return False
+
