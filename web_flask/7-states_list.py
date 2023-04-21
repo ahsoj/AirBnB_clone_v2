@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """List of states """
+
 from models import storage
 from flask import Flask, render_template
 
