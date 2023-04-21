@@ -33,7 +33,7 @@ def pythonFun(text="is cool"):
     return "Python {}".format(rep_text)
 
 
-@app.route("/python/<int:n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def nFun(n):
     """route with argument"""
     return "{} is number".format(n)
