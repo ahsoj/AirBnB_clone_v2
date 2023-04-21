@@ -21,7 +21,8 @@ def hbnb():
 @app.route("/c/<text>", strict_slashes=False)
 def cFun(text):
     """route with argument"""
-    return f"C {text.replace("_", " ")}"
+    rep_text = text.replace('_', ' ')
+    return "C {}".format(rep_text)
 
 
 if __name__ == '__main__':
