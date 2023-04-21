@@ -24,6 +24,7 @@ def cFun(text):
     rep_text = text.replace('_', ' ')
     return "C {}".format(rep_text)
 
+
 @app.route("/python", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def pythonFun(text="is cool"):
