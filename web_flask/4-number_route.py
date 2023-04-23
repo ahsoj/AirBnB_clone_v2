@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Create Flask Base app"""
+"""
+    Create Flask Base app
+"""
 
 from flask import Flask
 
@@ -33,11 +35,11 @@ def pythonFun(text="is cool"):
     return "Python {}".format(rep_text)
 
 
-@app.route("/number/<int:n>", strict_slashes=False)
+@app.route("/number/<n>", strict_slashes=False)
 def ifNumber(n):
     """route with argument"""
-    return "{:d} is number".format(n)
+    return "{} is number".format(n)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
