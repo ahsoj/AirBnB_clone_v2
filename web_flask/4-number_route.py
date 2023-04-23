@@ -20,7 +20,7 @@ def hbnb():
     return "HBNB"
 
 
-@app.route("/c/<text>", strict_slashes=False)
+@app.route("/c/<string:text>", strict_slashes=False)
 def cFun(text):
     """route with argument"""
     rep_text = text.replace('_', ' ')
@@ -28,17 +28,17 @@ def cFun(text):
 
 
 @app.route("/python", strict_slashes=False)
-@app.route("/python/<text>", strict_slashes=False)
+@app.route("/python/<string:text>", strict_slashes=False)
 def pythonFun(text="is cool"):
     """route with argument"""
     rep_text = text.replace('_', ' ')
     return "Python {}".format(rep_text)
 
 
-@app.route("/number/<n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def ifNumber(n):
     """route with argument"""
-    return "{} is number".format(n)
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
