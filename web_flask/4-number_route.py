@@ -36,8 +36,7 @@ def pythonFun(text="is cool"):
 @app.route("/number/<int:n>", strict_slashes=False)
 def nFun(n):
     """route with argument"""
-    if isinstance(n, int):
-        return "{} is number".format(n)
+    return "{:d} is number".format(n)
 
 
 if __name__ == '__main__':
