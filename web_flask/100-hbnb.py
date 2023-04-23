@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """hbnb filter"""
 from flask import Flask, render_template, Markup
-from models import storage
+
 import sys
+sys.path.insert(1, "/AirBnB_clone_v2")
+from models import storage
 
 app = Flask(__name__)
 
