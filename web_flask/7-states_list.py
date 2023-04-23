@@ -3,8 +3,7 @@
 
 from flask import Flask, render_template
 import sys
-
-sys.path.insert(1, '/AirBnB_clone_v2')
+# sys.path.insert(1, '/AirBnB_clone_v2')
 from models import storage
 
 app = Flask(__name__)
