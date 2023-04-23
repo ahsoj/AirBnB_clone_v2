@@ -67,8 +67,8 @@ class FileStorage:
 
     def delete(self, obj=None):
         """
-	    deletes the object obj from the attribute \
-		__objects if it's inside it
+         deletes the object obj from the attribute \
+          __objects if it's inside it
         """
         if obj is None:
             return
