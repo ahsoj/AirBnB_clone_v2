@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """List of states """
 
-from models import storage
 from flask import Flask, render_template
+import sys
 
-# storage = __import__("../models").storage
+sys.path.append('../')
+from models import storage
+# storage = getattr(__import__("../models"),storage)
 
 app = Flask(__name__)
 
