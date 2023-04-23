@@ -34,7 +34,7 @@ def pythonFun(text="is cool"):
 
 
 @app.route("/number/<int:n>", strict_slashes=False)
-def nFun(n):
+def ifNumber(n):
     """route with argument"""
     return "{:d} is number".format(n)
 
