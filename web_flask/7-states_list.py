@@ -4,9 +4,8 @@
 from flask import Flask, render_template
 import sys
 
-sys.path.append('../')
+sys.path.insert(1, '/AirBnB_clone_v2')
 from models import storage
-# storage = getattr(__import__("../models"),storage)
 
 app = Flask(__name__)
 
