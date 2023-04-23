@@ -38,7 +38,7 @@ class DBStorage:
                                            HBNB_MYSQL_PWD,
                                            HBNB_MYSQL_HOST,
                                            HBNB_MYSQL_DB
-                                       ), pool_pre_ping=True)
+                                       ))
 
         if HBNB_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
